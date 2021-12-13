@@ -19,7 +19,7 @@ import { ReactComponent as HandleIcon } from "images/handle-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg";
 
 import heroScreenshotImageSrc from "images/demo/MainLandingPageHero.png";
-import logo from "images/logo.svg";
+import logo from "images/logoJW.png";
 import useInView from "@owaiswiz/use-in-view";
 
 /* Hero */
@@ -136,12 +136,12 @@ export default ({
         <Content2Xl>
           <NavRow>
             <LogoLink href="/">
-              <img src={logo} alt="" />
-              Treact
+              <img src={logo} alt=""/>
+              CS5345 - Real-Time Convolution Filters
             </LogoLink>
             <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-              <NavLink target="_blank" href="https://owaiskhan.me/post/free-tailwindcss-react-ui-kit">
-                License & Usage
+              <NavLink target="_blank" href="/components/innerPages/AboutUsPage">
+                Application Usage
               </NavLink>
               <NavLink target="_blank" href="https://owaiskhan.me">
                 Who Am I ?

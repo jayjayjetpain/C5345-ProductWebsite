@@ -56,7 +56,7 @@ export default ({
   cards = null,
   heading = "Amazing Features",
   subheading = "",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  description = "Perform Real-Time Image Processing with a Variety of differnt Filters and Options."
 }) => {
   /*
    * This componets has an array of object denoting the cards defined below. Each object in the cards array can have the key (Change it according to your need, you can also add more objects to have more cards in this feature component) or you can directly pass this using the cards prop:
@@ -69,14 +69,34 @@ export default ({
   const defaultCards = [
     {
       imageSrc: ShieldIconImage,
-      title: "Secure",
-      description: "We strictly only deal with vendors that provide top notch security infrastructure."
+      title: "Convolutional Filters",
+      description: "Choose from one or more filters to apply to your webcam/image."
     },
-    { imageSrc: SupportIconImage, title: "24/7 Support" },
-    { imageSrc: CustomizeIconImage, title: "Customizable" },
-    { imageSrc: ReliableIconImage, title: "Reliable" },
-    { imageSrc: FastIconImage, title: "Fast" },
-    { imageSrc: SimpleIconImage, title: "Easy" }
+    {
+      imageSrc: SupportIconImage,
+      title: "Color Options",
+      description: "Choose to view your webcam in color or greyscale. Greyscale images process faster."
+    },
+    {
+      imageSrc: CustomizeIconImage,
+      title: "Code-Base Options",
+      description: "Choose from a native JS implementation or use WebAssembly."
+    },    
+    {
+      imageSrc: FastIconImage,
+      title: "Timing Analysis",
+      description: "Use the \"Timing Data\" section to view the processing latency for the current options selected. Use the button to save the data to a CSV file of last 2000 renders."
+    },
+    {
+      imageSrc: ReliableIconImage,
+      title: "Native App - Mutlithreading",
+      description: "Use the native application to use multithreading and split the convolution of the image using your computer's cores."
+    },
+
+    { 
+      imageSrc: SimpleIconImage,
+      title: "Native App - Processing local PNGs/JPGs",
+      description: "Use the native application to add the ability to process a local PNG/JPG on your computer with the filters."}
   ];
 
   if (!cards) cards = defaultCards;

@@ -10,6 +10,7 @@ import { Container, ContentWithVerticalPadding } from "components/misc/Layouts.j
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import { ReactComponent as QuotesLeftIconBase } from "images/quotes-l.svg"
 import { ReactComponent as SvgDecoratorBlob1 } from "images/dot-pattern.svg"
+import logo from "../../images/ProductPreview.png";
 
 const Header = tw(HeaderBase)`max-w-none`;
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
@@ -24,7 +25,7 @@ const FeatureIcon = tw(CheckboxIcon)`w-5 h-5 text-primary-500`;
 const FeatureText = tw.p`ml-2 font-medium text-gray-700`;
 const ImageColumn = tw(Column)`ml-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-32`;
 const ImageContainer = tw.div`relative z-40 transform xl:-translate-x-24 xl:-translate-y-16`;
-const Image = tw.img`max-w-full w-96 rounded-t sm:rounded relative z-20`;
+const Image = tw.img`max-w-full rounded-t sm:rounded relative z-20`;
 const Offsetbackground = tw.div`absolute inset-0 bg-gray-300 rounded xl:-mb-8`
 const ImageDecoratorBlob = styled(SvgDecoratorBlob1)`
   ${tw`pointer-events-none z-10 absolute right-0 bottom-0 transform translate-x-10 translate-y-10 h-32 w-32 opacity-25 text-gray-900 fill-current`}
@@ -37,14 +38,16 @@ const CustomerCompany = tw.p`mt-1 text-sm text-gray-500`
 
 
 export default ({
-  heading = "Better, Faster and Cheaper Cloud.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-  imageSrc = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+  heading = "Convolution Image Processing.",
+  description = "Apply Convolution Filters in Real-Time from your webcam source or by selecting a image file.",
+  imageSrc = {logo},
   imageDecoratorBlob = true,
   primaryButtonUrl = "https://google.com",
-  primaryButtonText = "Get Started",
+  primaryButtonText = "Open Webapp",
+  secondaryButtonUrl = "https://google.com",
+  secondaryButtonText = "Download Native App",
   buttonRounded = true,
-  features = ["Available in 7 Locations", "Premium Internet Backbone", "99.99% Uptime SLA"],
+  features = ["Real-Time Image Processing with Webcam Feed", "Ability to get Timing Data for Convolutions", "Ability to perform Convolutions on PNG/JPG FIles", "Downloadable Native Application for Window, Mac, and Linux"],
   testimonial = {
     quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     customerName: "Charlotte Hale",
@@ -54,19 +57,11 @@ export default ({
   const buttonRoundedCss = buttonRounded && tw`rounded-full`;
   const navLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">About</NavLink>
-      <NavLink href="/#">Blog</NavLink>
-      <NavLink href="/#">Pricing</NavLink>
-      <NavLink href="/#">Contact Us</NavLink>
-      <NavLink href="/#">Testimonials</NavLink>
-    </NavLinks>,
-    <NavLinks key={2}>
-      <NavLink href="/#" tw="lg:ml-12!">
-        Login
-      </NavLink>
-      <PrimaryLink css={buttonRoundedCss} href="/#">
-        Sign Up
-      </PrimaryLink>
+      <NavLink href="/#">Open Webapp</NavLink>
+      <NavLink href="/#">Webapp Documentation</NavLink>
+      <NavLink href="/#">Timing Analysis</NavLink>
+      {/* <NavLink href="/#">Contact Us</NavLink>
+      <NavLink href="/#">Testimonials</NavLink> */}
     </NavLinks>
   ];
   return (
@@ -81,6 +76,9 @@ export default ({
               <PrimaryButton as="a" href={primaryButtonUrl} css={buttonRoundedCss}>
                 {primaryButtonText}
               </PrimaryButton>
+              <PrimaryButton as="a" href={secondaryButtonUrl} css={buttonRoundedCss}>
+                {secondaryButtonText}
+              </PrimaryButton>
               <FeatureList>
                 {features.map((feature, index) => (
                   <Feature key={index}>
@@ -91,9 +89,9 @@ export default ({
               </FeatureList>
             </TextColumn>
             <ImageColumn>
-              <ImageContainer>
-                <Image src={imageSrc} />
-                {imageDecoratorBlob && <ImageDecoratorBlob />}
+              {/* <ImageContainer> */}
+                <Image src={logo} width={860} height={600} />
+                {/* {imageDecoratorBlob && <ImageDecoratorBlob />}
                 <Testimonial>
                   <QuotesLeftIcon/>
                   <Quote>{testimonial.quote}</Quote>
@@ -101,7 +99,7 @@ export default ({
                   <CustomerCompany>{testimonial.customerCompany}</CustomerCompany>
                 </Testimonial>
               </ImageContainer>
-              <Offsetbackground />
+              <Offsetbackground /> */}
             </ImageColumn>
           </Row>
         </ContentWithVerticalPadding>
