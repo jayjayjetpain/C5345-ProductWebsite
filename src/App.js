@@ -127,7 +127,7 @@ export default function App() {
         <Route path="/home">
           <MainLandingPage />
         </Route>
-        <Route path="/doc">
+        <Route path="doc">
           <WebappDocumentation />
         </Route>
         <Route path="/">
