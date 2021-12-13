@@ -105,7 +105,7 @@ import ComponentRenderer from "ComponentRenderer.js";
 import MainLandingPage from "MainLandingPage.js";
 import ThankYouPage from "ThankYouPage.js";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -113,7 +113,7 @@ export default function App() {
 
 
   return (
-    <Router>
+    // <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route path="/components/:type/:subtype/:name">
           <ComponentRenderer />
@@ -127,7 +127,7 @@ export default function App() {
         <Route path="/home">
           <MainLandingPage />
         </Route>
-        <Route path="doc">
+        <Route path="/doc">
           <WebappDocumentation />
         </Route>
         <Route path="/">
@@ -137,7 +137,7 @@ export default function App() {
           <ServiceLandingPage />
         </Route>
       </Switch>
-    </Router>
+    // </Router>
   );
 }
 
