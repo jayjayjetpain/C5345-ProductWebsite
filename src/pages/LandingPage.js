@@ -1,17 +1,17 @@
 import React from "react";
 import tw from "twin.macro";
-import AnimationRevealPage from "helpers/AnimationRevealPage.js";
+import AnimationRevealPage from "components/helpers/AnimationRevealPage.js";
 import fileAccess from "../images/FileAccess.PNG";
 import notification from "../images/Notification.png";
 import multithreading from "../images/Multithreading.PNG";
 
 
-import HeaderMain from "components/hero/HeaderMain.js";
+import HeaderMain from "components/headers/HeaderMain.js";
 import AppFeatures from "components/features/AppFeatures.js";
-import LearnMore from "components/cta/LearnMore.js";
+import LearnMore from "components/banners/LearnMore.js";
 import Footer from "components/footers/Footer";
 import MainFeature from "components/features/MainFeature.js";
-import DownloadApp from "components/cta/DownloadApp";
+import DownloadApp from "components/banners/DownloadApp";
 
 const HighlightedText = tw.span`text-primary-100`
 const Subheading = tw.span`uppercase tracking-wider text-sm`;

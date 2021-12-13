@@ -1,11 +1,11 @@
 import React from "react";
-import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
+import AnimationRevealPage from "../components/helpers/AnimationRevealPage.js";
+import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
-import HeaderSub from "components/headers/HeaderSub.js";
-import Footer from "components/footers/Footer";
-import { SectionHeading } from "components/misc/Headings";
+import HeaderSub from "../components/headers/HeaderSub.js";
+import Footer from "../components/footers/Footer";
+import { SectionHeading } from "../components/misc/Headings";
 import UML from "../images/UML.png"
 
 const Header = tw(HeaderSub)`max-w-none`;

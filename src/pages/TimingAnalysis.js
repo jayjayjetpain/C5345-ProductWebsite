@@ -1,11 +1,28 @@
 import React from "react";
-import AnimationRevealPage from "helpers/AnimationRevealPage.js";
+import AnimationRevealPage from "components/helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import HeaderSub from "components/headers/HeaderSub.js";
 import Footer from "components/footers/Footer";
 import { SectionHeading } from "components/misc/Headings";
+
+import WRW from "../images/WasmRgbWeb.png"
+import WGW from "../images/WasmGreyWeb.png"
+import JRW from "../images/JsRgbWeb.png"
+import JGW from "../images/JsGreyWeb.png"
+import RIW from "../images/RgbIntervalsWeb.png"
+import CIW from "../images/CodeIntervalsWeb.png"
+
+import WMRN from "../images/WasmMultiRgbNative.png"
+import WMGN from "../images/WasmMultiGreyNative.png"
+import WSRN from "../images/WasmSingleRgbNative.png"
+import WSGN from "../images/WasmSingleGreyNative.png"
+import JRN from "../images/JsRgbNative.png"
+import JGN from "../images/JsGreyNative.png"
+import FIN from "../images/FilterIntervalsNative.png"
+import RIN from "../images/RgbIntervalsNative.png"
+import CIN from "../images/CodeIntervalsNative.png"
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900 mb-10`;
@@ -33,7 +50,7 @@ const Text = styled.div`
     }
   }
 `;
-export default ({ headingText = "Privacy Policy" }) => {
+export default ({ headingText = "Timing Analysis for WebApp and Native App" }) => {
   return (
     <AnimationRevealPage>
       <HeaderSub />
@@ -43,344 +60,105 @@ export default ({ headingText = "Privacy Policy" }) => {
             <Heading>{headingText}</Heading>
           </HeadingRow>
           <Text>
-            <p>Last updated: April 21, 2020</p>
+            <p>Last updated: December 12, 2021</p>
 
             <p>
-              This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your
-              information when You use the Service and tells You about Your privacy rights and how the law protects You.
+              This Section will show raw timing data as well as analysis for both the WebApp and the Native Application. This will be in the form of screenshots of tabulated data as well as some description of descriptive statistics.
             </p>
 
+            <h1>Procedure of Collecting Data and Analysis Method</h1>
+            <h2>Collecting Data</h2>
             <p>
-              We use Your Personal data to provide and improve the Service. By using the Service, You agree to the
-              collection and use of information in accordance with this Privacy Policy.
+              Data was collected using the "Timing Data" Section from both apps. This collects 2000 renders of the webcam and saves the values to a csv file. This was collected for a variety of filter/color/code options.
+            </p>
+            <p>
+              For the WebApp, data was collected for each filter individually, for color and greyscale for both WASM and JS implementations. Similarly for the Natvie App, data was collected using the filters individually, for color and greyscale for WASM multithreaded, WASM single-threaded, and JS Native implementations.
             </p>
 
-            <h1>Interpretation and Definitions</h1>
-            <h2>Interpretation</h2>
+            <h2>Analysis Method</h2>
             <p>
-              The words of which the initial letter is capitalized have meanings defined under the following conditions.
+              Using these data files, Excel's Descriptive Stattistics Module was used to perform One-Variable Descriptive Statistics with a Confidence Intervals with Confidence Level of 95%. This provided lists of tabular data that were transferred to a big Excel file, and confidence intervals were compared.
             </p>
             <p>
-              The following definitions shall have the same meaning regardless of whether they appear in singular or in
-              plural.
+              Using the Confidence Intervals, those filter combinations whose intervals overlapped are said to not be statistically different, so for our purposes they perform the same.
+            </p>
+            
+            <br /><br />
+
+            <h1>WebApp Timing Analysis</h1>
+            <h2>Raw Timing Analysis Description</h2>
+
+            <p>
+              From the data that I collected, there were a few pair of intervals that overlapped. Two pairs that overlapped were the WASM execution in color of the Edge Detection (LoG) and the JS execution in greyscale of the Box Blur and of the Sharpen and the WASM execution in color of the Gaussian Blur 3x3 and the JS execution in greyscale of the Gaussian Blur 3x3, although these doesn’t give much info. Others were the WASM execution of Gaussian Blur 3x3 and Edge Detection (LoG) for color, WASM execution of all but Gaussian Blur 5x5 for greyscale, JS execution of Gaussian Blur 3x3, Emboss, and Sharpen for color, and the JS execution of Gaussian Blur 3x3, Sharpen, and Box Blur for greyscale. For all these pairs, there is enough statistical evidence to show that the execution of convolution with the filters is the same.
+            </p><br />
+            <p>
+              Based on the timing data collected, it appears that the WASM code performs about 2.19 times faster than the JS for both color and greyscale for Gaussian Blur 3x3. The WASM code performs about 2.52 times faster than the JS for both color and greyscale for Gaussian Blur 5x5. The WASM code performs about 2.18 times faster than the JS for both color and greyscale for Box Blur. The WASM code performs about 2.16 times faster than the JS for both color and greyscale for Sharpen. The WASM code performs about 2.32 times faster than the JS for both color and greyscale for Edge Detection (LoG). And the WASM code performs about 2.22 times faster than the JS for both color and greyscale for Emboss.
+            </p><br />
+            <p>
+              Other timing data observations, for both code bases the greyscale calculations were over 2 times faster for every filter as expected since there is less looping. The greyscale performs about 2.18 and 2.2 times faster than the RGB for Gaussian Blur 3x3 (WASM and JS respectively). The greyscale performs about 2.59 and 2.64 times faster than the RGB for Gaussian Blur 5x5. The greyscale performs about 2.15 and 2.16 times faster than the RGB for Box Blur. The greyscale performs about 2.25 and 2.2 times faster than the RGB for Sharpen. The greyscale performs about 2.18 and 2.12 times faster than the RGB for Edge Detection (LoG). And the greyscale performs about 2.13 and 2.16 times faster than the RGB for Emboss. This may show that Gaussian Blur 3x3, 5x5, Box Blur, and Emboss are faster in scale relative for WASM over JS and Sharpen and Edge Detection (LoG) are slightly faster in scale for JS over WASM. In scale meaning if the code bases performed relatively the same (JS twice as fast), then those filters perform slightly better on the corresponding bases.
+            </p><br />
+            <p>
+              Lastly, the timing data shows that for WASM, the quickest to the slowest filters are Emboss, Box Blur, Gaussian Blur 3x3 and Edge Detection (LoG), Sharpen, Gaussian Blur 5x5 for color and Gaussian Blur 3x3, Emboss, Sharpen, Edge Detection (LoG) and Box Blur, Gaussian Blur 5x5 for greyscale. And then for JS the order is Box Blur, Emboss and Gaussian Blur 3x3, Sharpen, Edge Detection (LoG), Gaussian Blur 5x5 for color and Gaussian Blur 3x3 and Sharpen and Box Blur, Emboss, Edge Detection (LoG), Gaussian Blur 5x5 for greyscale.
             </p>
 
-            <h2>Definitions</h2>
-            <p>For the purposes of this Privacy Policy:</p>
-            <ul>
-              <li>
-                <p>
-                  <strong>You</strong> means the individual accessing or using the Service, or the company, or other
-                  legal entity on behalf of which such individual is accessing or using the Service, as applicable.
-                </p>
-              </li>
-              <li>
-                <p>
-                  <strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement)
-                  refers to Treact.
-                </p>
-              </li>
-              <li>
-                <strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control
-                with a party, where "control" means ownership of 50% or more of the shares, equity interest or other
-                securities entitled to vote for election of directors or other managing authority.
-              </li>
-              <li>
-                <strong>Account</strong> means a unique account created for You to access our Service or parts of our
-                Service.
-              </li>
-              <li>
-                <strong>Website</strong> refers to Treact, accessible from https://treact.com
-              </li>{" "}
-              <li>
-                <strong>Service</strong> refers to the Website.
-              </li>
-              <li>
-                <strong>Country</strong> refers to: Maharashtra, India
-              </li>
-              <li>
-                <p>
-                  <strong>Service Provider</strong> means any natural or legal person who processes the data on behalf
-                  of the Company. It refers to third-party companies or individuals employed by the Company to
-                  facilitate the Service, to provide the Service on behalf of the Company, to perform services related
-                  to the Service or to assist the Company in analyzing how the Service is used.
-                </p>
-              </li>
-              <li>
-                <strong>Third-party Social Media Service</strong> refers to any website or any social network website
-                through which a User can log in or create an account to use the Service.
-              </li>
-              <li>
-                <p>
-                  <strong>Personal Data</strong> is any information that relates to an identified or identifiable
-                  individual.
-                </p>
-              </li>
-              <li>
-                <strong>Cookies</strong> are small files that are placed on Your computer, mobile device or any other
-                device by a website, containing the details of Your browsing history on that website among its many
-                uses.
-              </li>{" "}
-              <li>
-                <strong>Usage Data</strong> refers to data collected automatically, either generated by the use of the
-                Service or from the Service infrastructure itself (for example, the duration of a page visit).
-              </li>
-            </ul>
+            <h2>Raw Timing Data</h2>
+            <h3>WASM Timing Data</h3>
 
-            <h1>Collecting and Using Your Personal Data</h1>
-            <h2>Types of Data Collected</h2>
+            <img src={WRW} alt="WasmRgbWeb"></img>
+            <img src={WGW} alt="WasmGreyWeb"></img>
 
-            <h3>Personal Data</h3>
-            <p>
-              While using Our Service, We may ask You to provide Us with certain personally identifiable information
-              that can be used to contact or identify You. Personally identifiable information may include, but is not
-              limited to:
-            </p>
-            <ul>
-              <li>Email address</li> <li>First name and last name</li> <li>Phone number</li>{" "}
-              <li>Address, State, Province, ZIP/Postal code, City</li> <li>Usage Data</li>
-            </ul>
+            <h3>JS Timing Data</h3>
 
-            <h3>Usage Data</h3>
-            <p>Usage Data is collected automatically when using the Service.</p>
+            <img src={JRW} alt="JsRgbWeb"></img>
+            <img src={JGW} alt="JsGreyWeb"></img>
+
+            <h3>Confidence Intervals Comparisons</h3>
+
+            <img src={RIW} alt="RgbIntervalsWeb"></img><br />
+            <img src={CIW} alt="CodeIntervalsWeb"></img>
+
+            <br /><br />
+
+            <h1>Native App Timing Analysis</h1>
+            <h2>Raw Timing Analysis Description</h2>
+
             <p>
-              Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address),
-              browser type, browser version, the pages of our Service that You visit, the time and date of Your visit,
-              the time spent on those pages, unique device identifiers and other diagnostic data.
-            </p>
+              When comparing between multithreading and WASM and JS, there is no overlap between their confidence intervals. However, within multithreading executions, the Gaussian Blur 3x3, Box Blur, Edge Detection (or LoG), and Emboss overlap and Emboss and Sharpen overlap for RGB and all but the Gaussian Blur 5x5 overlap for greyscale. Other intervals that overlap (similar to Lab 2) are the WASM execution in color of the Edge Detection (LoG) and the JS execution in greyscale of the Box Blur and of the Sharpen and the WASM execution in color of the Gaussian Blur 3x3 and the JS execution in greyscale of the Gaussian Blur 3x3, the WASM execution of Gaussian Blur 3x3 and Edge Detection (LoG) for color, WASM execution of all but Gaussian Blur 5x5 for greyscale, JS execution of Gaussian Blur 3x3, Emboss, and Sharpen for color, and the JS execution of Gaussian Blur 3x3, Sharpen, and Box Blur for greyscale. For all these there is enough statistical evidence to show that the execution of convolution with the filters is the same.
+            </p><br />
             <p>
-              When You access the Service by or through a mobile device, We may collect certain information
-              automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique
-              ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet
-              browser You use, unique device identifiers and other diagnostic data.
-            </p>
+              Based on the timing data collected, the multithreading code runs about 1.77 times faster than normal WASM for RGB and 1.52 times faster for greyscale with the Gaussian Blur 3x3 filter. Multithreading code runs about 1.63 times faster than normal WASM for RGB and 1.62 times faster for greyscale with the Gaussian Blur 5x5 filter. Multithreading code runs about 1.75 times faster than normal WASM for RGB and 1.54 times faster for greyscale with the Box Blur 3x3 filter. Multithreading code runs about 1.75 times faster than normal WASM for RGB and 1.54 times faster for greyscale with the Sharpen filter. Multithreading code runs about 1.79 times faster than normal WASM for RGB and 1.53 times faster for greyscale with the Edge Detection (or LoG) filter. And Multithreading code runs about 1.69 times faster than normal WASM for RGB and 1.52 times faster for greyscale with the Emboss filter.
+            </p><br />
             <p>
-              We may also collect information that Your browser sends whenever You visit our Service or when You access
-              the Service by or through a mobile device.
+              Compared to the native JS code, the multithreading ran 3.8 to 4.1 times faster using RGB colors and it ran 3.3 to 3.6 times faster for all filters except Gaussian Blur 5x5 where it ran 4 times faster with greyscale values. Using all this data, on average we can see that multithreading provides a larger improvement when applying convolution to RGB images versus those in greyscale. The one exception seems to be using the Gaussian Blur 5x5 filter, as for both RGB and greyscale images, multithreading improves basic WASM by about 1.64 times and improves JS by about 4.1 times.
+            </p><br />
+            <p>
+              Lastly, within the multithreading WASM, the quickest to slowest filters are Gaussian Blur 3x3 and Edge Detection (or LoG) and Box Blur and Emboss, Sharpen, and Gaussian Blur 5x5 for RGB and Sharpen and Box Blur and Edge Detection (or LoG), Emboss and Gaussian Blur 3x3, and Gaussian Blur 5x5 for greyscale.
             </p>
 
-            <h3>Tracking Technologies and Cookies</h3>
-            <p>
-              We use Cookies and similar tracking technologies to track the activity on Our Service and store certain
-              information. Tracking technologies used are beacons, tags, and scripts to collect and track information
-              and to improve and analyze Our Service.
-            </p>
-            <p>
-              You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being sent. However,
-              if You do not accept Cookies, You may not be able to use some parts of our Service.
-            </p>
-            <p>
-              Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on your personal computer or
-              mobile device when You go offline, while Session Cookies are deleted as soon as You close your web
-              browser. Learn more about cookies: <a href="https://www.termsfeed.com/blog/cookies/">All About Cookies</a>
-              .
-            </p>
-            <p>We use both session and persistent Cookies for the purposes set out below:</p>
-            <ul>
-              <li>
-                <p>
-                  <strong>Necessary / Essential Cookies</strong>
-                </p>
-                <p>Type: Session Cookies</p>
-                <p>Administered by: Us</p>
-                <p>
-                  Purpose: These Cookies are essential to provide You with services available through the Website and to
-                  enable You to use some of its features. They help to authenticate users and prevent fraudulent use of
-                  user accounts. Without these Cookies, the services that You have asked for cannot be provided, and We
-                  only use these Cookies to provide You with those services.
-                </p>
-              </li>
-              <li>
-                <p>
-                  <strong>Cookies Policy / Notice Acceptance Cookies</strong>
-                </p>
-                <p>Type: Persistent Cookies</p>
-                <p>Administered by: Us</p>
-                <p>Purpose: These Cookies identify if users have accepted the use of cookies on the Website.</p>
-              </li>
-              <li>
-                <p>
-                  <strong>Functionality Cookies</strong>
-                </p>
-                <p>Type: Persistent Cookies</p>
-                <p>Administered by: Us</p>
-                <p>
-                  Purpose: These Cookies allow us to remember choices You make when You use the Website, such as
-                  remembering your login details or language preference. The purpose of these Cookies is to provide You
-                  with a more personal experience and to avoid You having to re-enter your preferences every time You
-                  use the Website.
-                </p>
-              </li>
-            </ul>
-            <p>
-              For more information about the cookies we use and your choices regarding cookies, please visit our Cookies
-              Policy.
-            </p>
+            <h2>Raw Timing Data</h2>
+            <h3>WASM Multithreaded Timing Data</h3>
 
-            <h2>Use of Your Personal Data</h2>
-            <p>The Company may use Personal Data for the following purposes:</p>
-            <ul>
-              <li>
-                <strong>To provide and maintain our Service</strong>, including to monitor the usage of our Service.
-              </li>
-              <li>
-                <strong>To manage Your Account:</strong> to manage Your registration as a user of the Service. The
-                Personal Data You provide can give You access to different functionalities of the Service that are
-                available to You as a registered user.
-              </li>
-              <li>
-                <strong>For the performance of a contract:</strong> the development, compliance and undertaking of the
-                purchase contract for the products, items or services You have purchased or of any other contract with
-                Us through the Service.
-              </li>
-              <li>
-                <strong>To contact You:</strong> To contact You by email, telephone calls, SMS, or other equivalent
-                forms of electronic communication, such as a mobile application's push notifications regarding updates
-                or informative communications related to the functionalities, products or contracted services, including
-                the security updates, when necessary or reasonable for their implementation.
-              </li>
-              <li>
-                <strong>To provide You</strong> with news, special offers and general information about other goods,
-                services and events which we offer that are similar to those that you have already purchased or enquired
-                about unless You have opted not to receive such information.
-              </li>
-              <li>
-                <strong>To manage Your requests:</strong> To attend and manage Your requests to Us.
-              </li>
-            </ul>
+            <img src={WMRN} alt="WasmMultiRgbNative"></img>
+            <img src={WMGN} alt="WasmMultiGreyNative"></img>
 
-            <p>We may share your personal information in the following situations:</p>
+            <h3>WASM Single-Threaded Timing Data</h3>
 
-            <ul>
-              <li>
-                <strong>With Service Providers:</strong> We may share Your personal information with Service Providers
-                to monitor and analyze the use of our Service, to contact You.
-              </li>
-              <li>
-                <strong>For Business transfers:</strong> We may share or transfer Your personal information in
-                connection with, or during negotiations of, any merger, sale of Company assets, financing, or
-                acquisition of all or a portion of our business to another company.
-              </li>
-              <li>
-                <strong>With Affiliates:</strong> We may share Your information with Our affiliates, in which case we
-                will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and
-                any other subsidiaries, joint venture partners or other companies that We control or that are under
-                common control with Us.
-              </li>
-              <li>
-                <strong>With Business partners:</strong> We may share Your information with Our business partners to
-                offer You certain products, services or promotions.
-              </li>
-              <li>
-                <strong>With other users:</strong> when You share personal information or otherwise interact in the
-                public areas with other users, such information may be viewed by all users and may be publicly
-                distributed outside. If You interact with other users or register through a Third-Party Social Media
-                Service, Your contacts on the Third-Party Social Media Service may see Your name, profile, pictures and
-                description of Your activity. Similarly, other users will be able to view descriptions of Your activity,
-                communicate with You and view Your profile.
-              </li>
-            </ul>
+            <img src={WSRN} alt="WasmSingleRgbNative"></img>
+            <img src={WSGN} alt="WasmSingleGreyNative"></img>
 
-            <h2>Retention of Your Personal Data</h2>
-            <p>
-              The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in
-              this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our
-              legal obligations (for example, if we are required to retain your data to comply with applicable laws),
-              resolve disputes, and enforce our legal agreements and policies.
-            </p>
-            <p>
-              The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained
-              for a shorter period of time, except when this data is used to strengthen the security or to improve the
-              functionality of Our Service, or We are legally obligated to retain this data for longer time periods.
-            </p>
+            <h3>JS Timing Data</h3>
 
-            <h2>Transfer of Your Personal Data</h2>
-            <p>
-              Your information, including Personal Data, is processed at the Company's operating offices and in any
-              other places where the parties involved in the processing are located. It means that this information may
-              be transferred to — and maintained on — computers located outside of Your state, province, country or
-              other governmental jurisdiction where the data protection laws may differ than those from Your
-              jurisdiction.
-            </p>
-            <p>
-              Your consent to this Privacy Policy followed by Your submission of such information represents Your
-              agreement to that transfer.
-            </p>
-            <p>
-              The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in
-              accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an
-              organization or a country unless there are adequate controls in place including the security of Your data
-              and other personal information.
-            </p>
+            <img src={JRN} alt="JsRgbNative"></img>
+            <img src={JGN} alt="JsGreyNative"></img>
 
-            <h2>Disclosure of Your Personal Data</h2>
-            <h3>Business Transactions</h3>
-            <p>
-              If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred.
-              We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy
-              Policy.
-            </p>
-            <h3>Law enforcement</h3>
-            <p>
-              Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do
-              so by law or in response to valid requests by public authorities (e.g. a court or a government agency).
-            </p>
-            <h3>Other legal requirements</h3>
-            <p>
-              The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:
-            </p>
-            <ul>
-              <li>Comply with a legal obligation</li>
-              <li>Protect and defend the rights or property of the Company</li>
-              <li>Prevent or investigate possible wrongdoing in connection with the Service</li>
-              <li>Protect the personal safety of Users of the Service or the public</li>
-              <li>Protect against legal liability</li>
-            </ul>
+            <h3>Confidence Intervals Comparisons</h3>
 
-            <h2>Security of Your Personal Data</h2>
-            <p>
-              The security of Your Personal Data is important to Us, but remember that no method of transmission over
-              the Internet, or method of electronic storage is 100% secure. While We strive to use commercially
-              acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.
-            </p>
-
-            <h1>Children's Privacy</h1>
-            <p>
-              Our Service does not address anyone under the age of 13. We do not knowingly collect personally
-              identifiable information from anyone under the age of 13. If You are a parent or guardian and You are
-              aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We
-              have collected Personal Data from anyone under the age of 13 without verification of parental consent, We
-              take steps to remove that information from Our servers.
-            </p>
-            <p>
-              If We need to rely on consent as a legal basis for processing Your information and Your country requires
-              consent from a parent, We may require Your parent's consent before We collect and use that information.
-            </p>
-
-            <h1>Links to Other Websites</h1>
-            <p>
-              Our Service may contain links to other websites that are not operated by Us. If You click on a third party
-              link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy
-              of every site You visit.
-            </p>
-            <p>
-              We have no control over and assume no responsibility for the content, privacy policies or practices of any
-              third party sites or services.
-            </p>
-
-            <h1>Changes to this Privacy Policy</h1>
-            <p>
-              We may update our Privacy Policy from time to time. We will notify You of any changes by posting the new
-              Privacy Policy on this page.
-            </p>
-            <p>
-              We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming
-              effective and update the "Last updated" date at the top of this Privacy Policy.
-            </p>
-            <p>
-              You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy
-              are effective when they are posted on this page.
-            </p>
+            <img src={FIN} alt="FilterIntervalsNative"></img><br />
+            <img src={RIN} alt="RgbIntervalsNative"></img><br />
+            <img src={CIN} alt="CodeIntervalsNative"></img>
+            
+            
+           
           </Text>
         </ContentWithPaddingXl>
       </Container>

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-9.svg";
-import { ContentWithPaddingXl, Container as ContainerBase } from "components/misc/Layouts";
-import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
-import windowsIconImageSrc from "images/windows.png";
-import macIconImageSrc from "images/mac.png"
-import linuxIconImageSrc from "images/linux.png"
+import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-9.svg";
+import { ContentWithPaddingXl, Container as ContainerBase } from "..//misc/Layouts";
+import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
+import windowsIconImageSrc from "../../images/windows.png";
+import macIconImageSrc from "../../images/mac.png"
+import linuxIconImageSrc from "../../images/linux.png"
 
 const Container = tw(ContainerBase)`bg-gray-900 -mx-8`
 const Content = tw(ContentWithPaddingXl)``

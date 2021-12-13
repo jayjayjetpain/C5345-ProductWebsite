@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 
-import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
+import useAnimatedNavToggler from "../helpers/useAnimatedNavToggler.js";
 
 import logo from "../../images/logoJW.png";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
@@ -67,7 +67,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const defaultLogoLink = (
     <LogoLink href="/CS5345-ProductWebsite">
       <img src={logo} alt="logo" />
-      CS - 5345 Product Website
+      CS5345 - Product Website
     </LogoLink>
   );
 

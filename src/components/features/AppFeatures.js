@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
-import { SectionDescription } from "components/misc/Typography.js";
+import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
+import { SectionDescription } from "../misc/Typography.js";
 
-import defaultCardImage from "images/shield-icon.svg";
+import defaultCardImage from "../../images/filter.png";
 
-import SupportIconImage from "images/support-icon.svg";
-import ShieldIconImage from "images/shield-icon.svg";
-import CustomizeIconImage from "images/customize-icon.svg";
-import FastIconImage from "images/fast-icon.svg";
-import ReliableIconImage from "images/reliable-icon.svg";
+import FilterIconImage from "../../images/filter.png";
+import ColorIconImage from "../../images/color.png";
+import CodeIconImage from "../../images/code.png";
+import TimeIconImage from "../../images/time.png";
+import ElectronIconImage from "../../images/electron.png";
 
 const Container = tw.div`relative bg-primary-900 -mx-8 px-8 text-gray-100`;
 
@@ -58,27 +58,27 @@ export default ({
 
   const defaultCards = [
     {
-      imageSrc: ShieldIconImage,
+      imageSrc: FilterIconImage,
       title: "Convolutional Filters",
       description: "Choose from one or more filters to apply to your webcam/image."
     },
     {
-      imageSrc: SupportIconImage,
+      imageSrc: ColorIconImage,
       title: "Color Options",
       description: "Choose to view your webcam in color or greyscale. Greyscale images process faster."
     },
     {
-      imageSrc: CustomizeIconImage,
+      imageSrc: CodeIconImage,
       title: "Code-Base Options",
       description: "Choose from a native JS implementation or use WebAssembly."
     },    
     {
-      imageSrc: FastIconImage,
+      imageSrc: TimeIconImage,
       title: "Timing Analysis",
       description: "Use the \"Timing Data\" section to view the processing latency for the current options selected. Use the button to save the data to a CSV file of last 2000 renders."
     },
     {
-      imageSrc: ReliableIconImage,
+      imageSrc: ElectronIconImage,
       title: "Native App Features",
       description: "Use the native application to get access to more features such as Multithreading and Local File Processing."
     }

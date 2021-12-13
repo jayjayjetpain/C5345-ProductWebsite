@@ -2,7 +2,7 @@ import "tailwindcss/dist/base.css";
 import "styles/globalStyles.css";
 import React from "react";
 
-import LandingPage from "demos/LandingPage.js";
+import LandingPage from "pages/LandingPage.js";
 import WebappDocumentation from "pages/WebappDocumentation";
 import TimingAnalysis from "pages/TimingAnalysis.js";
 

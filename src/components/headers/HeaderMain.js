@@ -1,10 +1,10 @@
 import React from "react";
 import tw from "twin.macro";
-import HeaderSub, { NavLinks, NavLink } from "components/headers/HeaderSub.js";
-import { SectionHeading } from "components/misc/Headings.js";
-import { SectionDescription } from "components/misc/Typography.js";
-import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-import { Container, ContentWithVerticalPadding } from "components/misc/Layouts.js";
+import HeaderSub, { NavLinks, NavLink } from "../headers/HeaderSub.js";
+import { SectionHeading } from "../misc/Headings.js";
+import { SectionDescription } from "../misc/Typography.js";
+import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
+import { Container, ContentWithVerticalPadding } from "../misc/Layouts.js";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import logo from "../../images/ProductPreview.png";
 
