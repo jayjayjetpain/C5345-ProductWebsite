@@ -98,7 +98,7 @@ import ServiceLandingPage from "demos/ServiceLandingPage.js";
 // import AboutUsPage from "pages/AboutUs.js";
 // import ContactUsPage from "pages/ContactUs.js";
 // import BlogIndexPage from "pages/BlogIndex.js";
-// import TermsOfServicePage from "pages/TermsOfService.js";
+import WebappDocumentation from "pages/WebappDocumentation";
 // import PrivacyPolicyPage from "pages/PrivacyPolicy.js";
 
 import ComponentRenderer from "ComponentRenderer.js";
@@ -127,7 +127,13 @@ export default function App() {
         <Route path="/home">
           <MainLandingPage />
         </Route>
+        <Route path="/doc">
+          <WebappDocumentation />
+        </Route>
         <Route path="/">
+          <ServiceLandingPage />
+        </Route>
+        <Route path="/timing">
           <ServiceLandingPage />
         </Route>
       </Switch>

@@ -25,7 +25,7 @@ import PricingPage from "pages/Pricing.js";
 import AboutUsPage from "pages/AboutUs.js";
 import ContactUsPage from "pages/ContactUs.js";
 import BlogIndexPage from "pages/BlogIndex.js";
-import TermsOfServicePage from "pages/TermsOfService.js";
+import TermsOfServicePage from "pages/WebappDocumentation.js";
 import PrivacyPolicyPage from "pages/PrivacyPolicy.js";
 
 import LoginPageImageSrc from "images/demo/LoginPage.jpeg";
